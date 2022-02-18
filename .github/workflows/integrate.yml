@@ -13,5 +13,5 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Build the docker image
-        run: docker build . --file Dockerfile --tag docker-img-ci:$(date +%s)
+        run: sudo docker build . --file Dockerfile --tag docker-img-ci:$(date +%s)
       
