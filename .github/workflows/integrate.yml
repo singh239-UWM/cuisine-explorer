@@ -13,5 +13,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Build the docker image
-        run: sudo docker build . --file Dockerfile --tag docker-img-ci:$(date +%s)
-      
+        run: sudo docker build . --file Dockerfile --tag nodejs-app:latest
+      - name: Deploy container
+        run: sudo docker run nodejs-app:latest      
