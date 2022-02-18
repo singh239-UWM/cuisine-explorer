@@ -1,9 +1,10 @@
 import styles from '../styles/Login.module.css'
+import Image from 'next/image'
 
 export default function login() {
     return (
       <div className={styles.container}>
-        <h1>Login</h1>
+        <img style={{maxWidth: "400px"}} src='/DSC_1026.JPG'></img>
         
       </div>
     )
