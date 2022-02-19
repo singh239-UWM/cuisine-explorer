@@ -5,8 +5,8 @@ import Router from 'next/router'
 export default function Home() {
   return (
     <div className={styles.container}>
-      <h1 className={styles.heading}>Janta Is Gay</h1>
-      <p>View Janta OnlyFans</p>
+      <h1 className={styles.heading}>NoTa</h1>
+      <p>Welcome to NoTa</p>
       <button className={styles.button} onClick={clickHandle} >Log In</button>
     </div>
   )

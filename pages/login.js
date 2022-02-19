@@ -4,7 +4,7 @@ import Image from 'next/image'
 export default function login() {
     return (
       <div className={styles.container}>
-        <img style={{maxWidth: "400px"}} src='/DSC_1026.JPG'></img>
+        <h1>Login</h1>
         
       </div>
     )
