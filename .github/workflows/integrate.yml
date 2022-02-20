@@ -17,4 +17,4 @@ jobs:
       - name: Build the docker image
         run: sudo docker build . --file Dockerfile --tag nodejs-app:latest    
       - name: Run conainer
-        run: sudo docker run -p 3000:3000 nodejs-app:latest &
+        run: sudo docker run -rm -d -p 3000:3000 nodejs-app:latest 
