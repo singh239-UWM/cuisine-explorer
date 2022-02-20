@@ -12,7 +12,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Stop nodejs container
+        run: sudo docker stop nodejs_container
+      - name: Remove existing images
+        run: yes | sudo docker system prune -a
       - name: Build the docker image
         run: sudo docker build . --file Dockerfile --tag nodejs-app:latest    
       - name: Run conainer
-        run: sudo docker run -d -p 3000:3000 nodejs-app:latest --name nodejs_container
+        run: sudo docker run -d -p 3000:3000 --name nodejs_container nodejs-app:latest
