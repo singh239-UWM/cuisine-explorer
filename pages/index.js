@@ -1,7 +1,7 @@
 import IndexNav from '../components/IndexNav';
 import styles from '../styles/Home.module.css'
 import Router from 'next/router'
-import { Header, Grid, Menu, Center, Group, Drawer, Burger, Autocomplete, ActionIcon, Text, Image, Divider, } from '@mantine/core';
+import { Grid, Center, Autocomplete, ActionIcon, Text, Image, } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { useEffect, useState } from 'react';
 import { Search } from '@mui/icons-material';

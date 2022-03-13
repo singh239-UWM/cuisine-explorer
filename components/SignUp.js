@@ -47,11 +47,6 @@ export default function SignUp() {
                                     <TextInput label="Last Name" placeholder="Last Name"/>
                                 </Grid.Col>
                             </Grid>
-                            <DatePicker
-                                placeholder="Event date"
-                                label="Pick date"
-                                
-                                />
                         </Group>
                     </Container>
                 </>
