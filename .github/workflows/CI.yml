@@ -18,5 +18,5 @@ jobs:
     - name: Build Docker image
       run: sudo docker build . --file Dockerfile --tag nodejs-app:latest
     
-    - name: Push Docker Image to Hub
+    - name: Push Docker Image
       run: sudo docker push nodejs-app:latest
