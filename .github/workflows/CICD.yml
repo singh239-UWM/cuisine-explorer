@@ -34,4 +34,4 @@ jobs:
         run: sudo docker pull apnavirk/nodejs-app
       
       - name: Run conainer
-        run: sudo docker run -d -p 3000:3000 --name nodejs_container nodejs-app:lates
+        run: sudo docker run -d -p 3000:3000 --name nodejs_container apnavirk/nodejs-app:lates
