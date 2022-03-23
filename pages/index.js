@@ -15,6 +15,10 @@ export default function Home() {
     setSsr(true)
   }, []);
 
+  const handleExploreCountries = () => {
+    Router.push("/countries")
+  }
+
   return (
     <>
       <IndexNav></IndexNav>
@@ -56,6 +60,7 @@ export default function Home() {
                 <Image className={styles.imgEffect}
                   height={300}
                   src="static/flag_food_edited.jpg"
+                  onClick={handleExploreCountries}
                 />
               </Grid.Col>
 

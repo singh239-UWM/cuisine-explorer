@@ -1,14 +1,46 @@
+import auth from '../firebase/auth';
 import Router from 'next/router'
-import { Header, Grid, Menu, Center, Group, Drawer, Burger, Autocomplete, ActionIcon, Text, Image, Divider, } from '@mantine/core';
+import { Header, Grid, Menu, Center, Group, Drawer, Burger, Modal, ActionIcon, Text, Image, Divider, } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
+import { onAuthStateChanged } from 'firebase/auth'
 import { useEffect, useState } from 'react';
 import { AccountCircle } from '@mui/icons-material';
+import SignUp from './SignUp';
+import LogIn from './LogIn';
 
 
 export default function IndexNav() {
     const matches = useMediaQuery('(min-width: 800px)');
     const [ssr, setSsr] = useState(false);
+    //mobile drawer
     const [opened, setOpened] = useState(false);
+    //login/signup modal
+    const [openedSignUpModal, setOpenedSignUpModal] = useState(false);
+    const [openedLogModal, setOpenedLogModal] = useState(false);
+    //user logedin state
+    const [userSignedIn, setUserSignedIn] = useState(undefined);
+
+    const clickHandleSignOut = (e) => {
+        auth.signOut()
+        if (window.location.pathname === "/") {
+            Router.reload()
+        } else {
+            Router.push("/")
+        }
+    }
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/firebase.User
+            setUserSignedIn(true)
+            // ...
+        } else {
+            // User is signed out
+            // ...
+            setUserSignedIn(false)
+        }
+    });
 
     useEffect(() => {
         setSsr(true)
@@ -18,6 +50,22 @@ export default function IndexNav() {
         <>
             {matches & ssr ? (
                 <>
+                    <Modal
+                        opened={openedSignUpModal}
+                        onClose={() => setOpenedSignUpModal(false)}
+                    >
+                        <Center>
+                            <SignUp />
+                        </Center>
+                    </Modal>
+                    <Modal
+                        opened={openedLogModal}
+                        onClose={() => setOpenedLogModal(false)}
+                    >
+                        <Center>
+                            <LogIn />
+                        </Center>
+                    </Modal>
                     <Header height={50} padding="xs"
                         sx={{
                             backgroundColor: '#3B393A',
@@ -35,11 +83,30 @@ export default function IndexNav() {
                                             <ActionIcon color={'yellow'} size={'lg'}>
                                                 <AccountCircle fontSize='large'></AccountCircle>
                                             </ActionIcon>}>
-                                            <Menu.Item onClick={clickHandleSignUp}>Sign Up</Menu.Item>
-                                            <Menu.Item onClick={clickHandleLogIn}>Log In</Menu.Item>
-                                            <Divider />
-                                            <Menu.Item>Random</Menu.Item>
-                                            <Menu.Item>Top Recipes</Menu.Item>
+
+                                            {userSignedIn ? (
+                                                <>
+                                                    <Menu.Item>Welcome</Menu.Item>
+                                                    <Menu.Item onClick={clickHandleSignOut}>
+                                                        Log Out
+                                                    </Menu.Item>
+                                                    <Divider />
+                                                    <Menu.Item>Random</Menu.Item>
+                                                    <Menu.Item>Top Recipes</Menu.Item>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <Menu.Item onClick={() => setOpenedSignUpModal(true)}>
+                                                        Sign Up
+                                                    </Menu.Item>
+                                                    <Menu.Item onClick={() => setOpenedLogModal(true)}>
+                                                        Log In
+                                                    </Menu.Item>
+                                                    <Divider />
+                                                    <Menu.Item>Random</Menu.Item>
+                                                    <Menu.Item>Top Recipes</Menu.Item>
+                                                </>
+                                            )}
                                         </Menu>
                                     </Group>
                                 </Grid.Col>
@@ -72,12 +139,4 @@ export default function IndexNav() {
             )}
         </>
     );
-}
-
-const clickHandleLogIn = (e) => {
-    Router.push('/login')
-}
-
-const clickHandleSignUp = (e) => {
-    Router.push('/signup')
 }
