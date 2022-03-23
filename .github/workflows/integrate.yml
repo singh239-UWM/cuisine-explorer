@@ -12,8 +12,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      # - name: Stop nodejs container
-      #   run: sudo docker stop nodejs_container
       - name: Remove existing images
         run: yes | sudo docker system prune -a
       - name: Build the docker image
