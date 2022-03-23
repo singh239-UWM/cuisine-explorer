@@ -59,7 +59,7 @@ export default function Countries({ data }) {
                                                 <Badge color="green" variant="light">{c.region}</Badge>
                                             </Group>
                                             <Button key={i} variant="light" color="orange" fullWidth style={{ marginTop: 14 }} onClick={() => Router.push("/countries/" + c.country)}>
-                                                Explore {c.country}'s Cousine
+                                                Explore {c.country}&apos;s Cousine
                                             </Button>
                                         </Card>
                                     </div>
