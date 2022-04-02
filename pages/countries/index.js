@@ -52,14 +52,14 @@ export default function Countries({ data }) {
                                     <div style={{ width: 330, margin: 'auto' }}>
                                         <Card shadow="sm" p="lg">
                                             <Card.Section>
-                                                <Image src="https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80" height={160} alt="Norway" />
+                                                <Image src={c.picRef} height={160}/>
                                             </Card.Section>
                                             <Group position="apart" style={{ marginBottom: 5, marginTop: 2 }}>
                                                 <Text weight={500}>{c.country}</Text>
                                                 <Badge color="green" variant="light">{c.region}</Badge>
                                             </Group>
                                             <Button key={i} variant="light" color="orange" fullWidth style={{ marginTop: 14 }} onClick={() => Router.push("/countries/" + c.country)}>
-                                                Explore {c.country}&apos;s Cousine
+                                                Explore {c.country}&apos;s Cuisines
                                             </Button>
                                         </Card>
                                     </div>
@@ -77,7 +77,7 @@ export default function Countries({ data }) {
 
 export async function getServerSideProps() {
     // Fetch data from external API
-    const res = await fetch(`http://localhost:3000/api/countries`)
+    const res = await fetch(`https://ruqx9dv2kg.execute-api.us-east-1.amazonaws.com/v1/countries?req=all_countries`)
     const data = await res.json()
 
     // Pass data to the page via props

@@ -1,7 +1,8 @@
-import { collection, addDoc, doc, setDoc, getDocs } from "firebase/firestore";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, collection, addDoc, doc, setDoc, getDocs, query, where } from "firebase/firestore";
+// import { getFirestore } from "firebase/firestore";
+import app from "./firebase-config";
 
-const db = getFirestore();
+const db = getFirestore(app);
 
 export async function firebaseStoreNewUser(values, uid) {
   // console.log(data)
@@ -25,4 +26,24 @@ export async function firebaseStoreNewUser(values, uid) {
   } catch (e) {
     console.log("Error adding document: ", e);
   }
+}
+
+export async function firebaseGetCuisines(county) {
+  const collectionRef = collection(db, "recipesByCountry")
+
+  const qData = []
+
+  const q = query(collectionRef, where("country", "==", county))
+
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    // console.log(doc.id, " => ", doc.data());
+    let data = {
+      "id": doc.id,
+      "data": doc.data()
+    }
+    qData.push(data)
+  });
+
+  return qData
 }

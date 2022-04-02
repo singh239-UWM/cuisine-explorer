@@ -2,6 +2,7 @@
 FROM node:current-alpine AS deps
 WORKDIR /app
 COPY package.json ./
+COPY .env.local ./
 RUN npm install
 COPY . .
 
@@ -21,6 +22,8 @@ COPY --from=build /build/public ./public
 COPY --from=build /build/package*.json ./
 COPY --from=build /build/.next ./.next
 COPY --from=build /build/static ./static
+COPY --from=build /build/firebase ./firebase
+COPY --from=build /build/.env.local ./.env.local
 RUN npm install next
 
 EXPOSE 3000
