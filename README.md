@@ -1,5 +1,8 @@
 This is Cuisine Explorer web app. This app allow user to explore differnt types of cuisines. Users can save different cuisines into their profile save list.
 
+## Live Demo
+https://cuisine-explorer.vercel.app/
+
 ## Getting Started
 
 First, run the development server:
