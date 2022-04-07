@@ -4,7 +4,7 @@ import { Header, Grid, Menu, Center, Group, Drawer, Burger, Modal, ActionIcon, T
 import { useMediaQuery } from '@mantine/hooks';
 import { onAuthStateChanged } from 'firebase/auth'
 import { useEffect, useState } from 'react';
-import { AccountCircle } from '@mui/icons-material';
+import { AccountCircle, List } from '@mui/icons-material';
 import SignUp from './SignUp';
 import LogIn from './LogIn';
 
@@ -79,10 +79,20 @@ export default function IndexNav() {
                                 </Grid.Col>
                                 <Grid.Col span={1} offset={10}>
                                     <Group position="right">
-                                        <Menu control={
-                                            <ActionIcon color={'yellow'} size={'lg'}>
-                                                <AccountCircle fontSize='large'></AccountCircle>
-                                            </ActionIcon>}>
+                                        <Menu
+                                            control={
+                                                <ActionIcon color={'yellow'} size={'lg'}
+                                                    sx={() => ({
+                                                        backgroundColor: 'black',
+                                                        width: 'auto',
+                                                        '&:hover': {
+                                                            backgroundColor: 'white',
+                                                            width: 'auto'
+                                                        },
+                                                    })}>
+                                                    <List fontSize='large'></List>
+                                                    <AccountCircle fontSize='large'></AccountCircle>
+                                                </ActionIcon>}>
 
                                             {userSignedIn ? (
                                                 <>
